@@ -1,0 +1,22 @@
+threads: 50 # Number of worker threads for concurrent operations
+                              # Minimum: 1, Recommended: 10-50 based on system resource
+keepalive_interval: 80       # Keepalive signal frequency in seconds
+                             # Controls connection health monitoring
+# referral_codes:              # List of referral codes for tracking and rewards
+#   - ""                       # Add multiple codes as needed, one per line
+two_captcha_api_key: "bc49cc9d264357ec65e6978815d92946"     # API authentication key for 2captcha service
+anti_captcha_api_key: ""    # API authentication key for anticaptcha service
+yes_captcha_api_key: ""    # API authentication key for anticaptcha service
+haxi_imap_setting:
+  auth_user: a
+  auth_pwd: b
+  imap_server: c
+
+
+
+# 执行 代理任务 的进程数
+FRAMING_PROCESSES: 20
+# 登录并发数 避免同时大量消耗 cloudflare 的次数
+FRAMING_CONCURRENCY: 150
+# # 签到与加速进程数
+# CHECKIN_PROCESSES: 5
