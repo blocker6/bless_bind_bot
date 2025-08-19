@@ -363,9 +363,11 @@ class TwiiterOAuth_1:
     async def twitter_http_get_auth_code(self):
         # if self.twitter_http is None:
         #     raise ValueError("twitter_http is not initialized")
-        """获取OAuth授权码"""
-        url ="https://twitter.com/i/api/2/oauth2/authorize?client_id=dGdQVjlfLUdiUVJPZnpYSzQ0aF86MTpjaQ&code_challenge=test&code_challenge_method=plain&redirect_uri=https%3A%2F%2Fbless.network%2Fdashboard%2Fachievements&response_type=code&scope=follows.write%20users.read%20tweet.read&state=state"
+        # url ="https://twitter.com/i/api/2/oauth2/authorize?client_id=dGdQVjlfLUdiUVJPZnpYSzQ0aF86MTpjaQ&code_challenge=test&code_challenge_method=plain&redirect_uri=https%3A%2F%2Fbless.network%2Fdashboard%2Fachievements&response_type=code&scope=follows.write%20users.read%20tweet.read&state=state"
         
+        url = "https://twitter.com/i/api/2/oauth2/authorize?client_id=dGdQVjlfLUdiUVJPZnpYSzQ0aF86MTpjaQ&code_challenge=test&code_challenge_method=plain&redirect_uri=https%3A%2F%2Fbless.network%2Fdashboard%2Fcallback%2Fx&response_type=code&scope=users.read%20tweet.read&state=state"
+
+
         self.http.headers.update(
             headers = {
                     'pragma': 'no-cache',
@@ -422,7 +424,7 @@ class TwiiterOAuth_1:
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-origin',
             # 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
-            'x-client-transaction-id': 'qtcdHZXEzrF9oXQWYKg984T2JLXdwCfc38SIXNnfHtYf1yqlRVZ2Hj3j4TxNEUiHs9Bdja7uo8q/og1dRN0f6AJ31QQdqQ',
+            'x-client-transaction-id': 'PPfRivBqFHPbml9HRZU32+yWqsj9Q9AK1XC/KpYY56KNTxjSE+VdPFT+y7TemiFf81yGaDh19MdWo8WFZPzcIjjsS3pTPw',
             'x-csrf-token': self.ct0,
             'x-twitter-active-user': 'yes',
             'x-twitter-auth-type': 'OAuth2Session',

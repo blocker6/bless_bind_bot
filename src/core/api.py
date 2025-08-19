@@ -408,10 +408,9 @@ class API():
             
             payload = {
                 "code": code,
-                "gatewayAuthToken": f"{self.account.bless_auth_token}"
+                "gatewayAuthToken": f"{self.account.bless_auth_token}\n"
             }
             logger.success(payload)
-            
             headers = {
                 'accept': '*/*',
                 # 'accept-language': 'zh-CN,zh;q=0.9,ja;q=0.8,en-US;q=0.7,en;q=0.6',
@@ -420,7 +419,7 @@ class API():
                 'origin': 'https://bless.network',
                 'pragma': 'no-cache',
                 'priority': 'u=1, i',
-                'referer': 'https://bless.network/dashboard/callback/x?state=state&code=VjFsMld4UVBwc2xvMDFMR1BHTkctNldrRnI3aGtEbVFTNUhNT0xUWU5HY1FHOjE3NTU1ODA3NzA5MTM6MTowOmFjOjE',
+                'referer': 'https://bless.network/dashboard/callback/x?state=state&code={code}',
                 # 'sec-ch-ua': '"Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"',
                 'sec-ch-ua-mobile': '?0',
                 'sec-ch-ua-platform': '"Windows"',
@@ -433,7 +432,7 @@ class API():
             if not proxy_url:
                 proxy_url= self.account.proxy_url
             print(proxy_url)
-            resp = await asyncio.to_thread(requests.post, url=url, headers=headers, json=payload, timeout=30, impersonate="safari15_5", proxy=proxy_url)
+            resp = await asyncio.to_thread(requests.post, url=url, headers=headers, json=payload, timeout=30, impersonate="chrome120", proxy=proxy_url)
             logger.debug(resp.text)
 
             if 'X Connect Success!' in resp.text:

@@ -278,7 +278,8 @@ async def bind_twitter(bot: API, proxy_url=None):
         auth_code = await twiiter_oauth.twitter_http_get_auth_code()
         data = await twiiter_oauth.authorize_oauth2(auth_code)
         logger.success(auth_code)
-        await bot.before_bind_twitter(auth_code, proxy_url=proxy_url)
+        logger.success(bot.account.bless_auth_token)
+        # await bot.before_bind_twitter(auth_code, proxy_url=proxy_url)
         data = await bot.bind_twitter(auth_code, proxy_url=proxy_url)
         print(data)
     except Exception as e:
