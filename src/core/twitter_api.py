@@ -170,7 +170,7 @@ class TwiiterOAuth_1:
                     "priority": "u=0, i",
                     "upgrade-insecure-requests": "1",
                 }
-            url = "https://x.com/"
+            url = "https://twitter.com/"
             # print(self.http.headers)
             self.http.headers.update(headers)
             resp = await self.http.get(url)
@@ -214,7 +214,7 @@ class TwiiterOAuth_1:
             "referer": "https://api.x.com/",
             "upgrade-insecure-requests": "1"
         }
-        url = f"https://api.x.com/oauth/authorize?oauth_token={oauth_token}&oauth_token_secret={oauth_token_secret}&oauth_callback_confirmed=true"
+        url = f"https://api.twitter.com/oauth/authorize?oauth_token={oauth_token}&oauth_token_secret={oauth_token_secret}&oauth_callback_confirmed=true"
         response = await self.http.get(url, headers=headers)
         # logger.success(response.text)
         if "authenticity_token" in response.text:
@@ -364,7 +364,7 @@ class TwiiterOAuth_1:
         # if self.twitter_http is None:
         #     raise ValueError("twitter_http is not initialized")
         """获取OAuth授权码"""
-        url ="https://x.com/i/api/2/oauth2/authorize?client_id=dGdQVjlfLUdiUVJPZnpYSzQ0aF86MTpjaQ&code_challenge=test&code_challenge_method=plain&redirect_uri=https%3A%2F%2Fbless.network%2Fdashboard%2Fachievements&response_type=code&scope=follows.write%20users.read%20tweet.read&state=state"
+        url ="https://twitter.com/i/api/2/oauth2/authorize?client_id=dGdQVjlfLUdiUVJPZnpYSzQ0aF86MTpjaQ&code_challenge=test&code_challenge_method=plain&redirect_uri=https%3A%2F%2Fbless.network%2Fdashboard%2Fachievements&response_type=code&scope=follows.write%20users.read%20tweet.read&state=state"
         
         self.http.headers.update(
             headers = {
@@ -403,7 +403,7 @@ class TwiiterOAuth_1:
     async def authorize_oauth2(self, code: str):
         """OAuth2授权确认"""
         # url = "https://x.com/i/api/2/oauth2/authorize"
-        url = "https://x.com/i/api/2/oauth2/authorize"
+        url = "https://twitter.com/i/api/2/oauth2/authorize"
 
         headers = {
             'accept': '*/*',
