@@ -384,6 +384,7 @@ class API():
                 "code": code,
                 "gatewayAuthToken": f"{self.account.bless_auth_token}\n"
             }
+            logger.success(payload)
             
             headers = {
                 'host': 'bless.network',
