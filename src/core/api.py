@@ -373,6 +373,32 @@ class API():
             return
         raise Exception("Discord 绑定失败")
 
+
+    async def before_bind_twitter(self, code:str, proxy_url: str = None):
+        """在绑定Twitter之前，先获取授权码"""
+
+        url = F"https://bless.network/dashboard/callback/x?state=state&code={code}" 
+
+        payload = {}
+        headers = {
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'cache-control': 'no-cache',
+                'pragma': 'no-cache',
+                'priority': 'u=0, i',
+                'referer': 'https://twitter.com/',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"Windows"',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'cross-site',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+            }
+        headers.update({'user-agent': self.account.user_agent, 'accept-language': 'en,en-US;q=0.9'})
+        resp = await asyncio.to_thread(requests.get, url=url, headers=headers, timeout=30, impersonate="safari15_5", proxy=proxy_url)
+        if resp.status_code != 200:
+            raise Exception(f"获取授权码失败: {resp.text}")
+
     
     async def bind_twitter(self, code: str, proxy_url: str = None):
         try:
@@ -388,20 +414,21 @@ class API():
             
             headers = {
                 'accept': '*/*',
-                #'accept-language': 'zh-CN,zh;q=0.9,ja;q=0.8,en-US;q=0.7,en;q=0.6',
+                # 'accept-language': 'zh-CN,zh;q=0.9,ja;q=0.8,en-US;q=0.7,en;q=0.6',
                 'cache-control': 'no-cache',
                 'content-type': 'application/json',
                 'origin': 'https://bless.network',
                 'pragma': 'no-cache',
                 'priority': 'u=1, i',
-                'referer': F'https://bless.network/dashboard/callback/x?state=state&code={code}', 
+                'referer': 'https://bless.network/dashboard/callback/x?state=state&code=VjFsMld4UVBwc2xvMDFMR1BHTkctNldrRnI3aGtEbVFTNUhNT0xUWU5HY1FHOjE3NTU1ODA3NzA5MTM6MTowOmFjOjE',
                 # 'sec-ch-ua': '"Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"',
                 'sec-ch-ua-mobile': '?0',
                 'sec-ch-ua-platform': '"Windows"',
                 'sec-fetch-dest': 'empty',
                 'sec-fetch-mode': 'cors',
                 'sec-fetch-site': 'same-origin',
-            }
+                # 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'
+                }
             headers.update({'user-agent': self.account.user_agent, 'accept-language': 'en,en-US;q=0.9'})
             if not proxy_url:
                 proxy_url= self.account.proxy_url

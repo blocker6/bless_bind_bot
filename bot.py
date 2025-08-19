@@ -278,6 +278,7 @@ async def bind_twitter(bot: API, proxy_url=None):
         auth_code = await twiiter_oauth.twitter_http_get_auth_code()
         data = await twiiter_oauth.authorize_oauth2(auth_code)
         logger.success(auth_code)
+        await bot.before_bind_twitter(auth_code, proxy_url=proxy_url)
         data = await bot.bind_twitter(auth_code, proxy_url=proxy_url)
         print(data)
     except Exception as e:
@@ -292,7 +293,7 @@ async def process_bind_twitter():
         accounts = await Account.filter(twitter_auth_token__isnull=False, is_delete=False, is_twitter_connected=False)
         print(len(accounts))
         random.shuffle(accounts)
-        semaphore = asyncio.Semaphore(5)
+        semaphore = asyncio.Semaphore(1)
         async def limited_bind_twitter(account: Account, proxy_url):
             async with semaphore:
                 bot = API(account)
