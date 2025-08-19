@@ -382,21 +382,25 @@ class API():
             
             payload = {
                 "code": code,
-                "gatewayAuthToken": f"{self.account.bless_auth_token}\n"
+                "gatewayAuthToken": f"{self.account.bless_auth_token}"
             }
             logger.success(payload)
             
             headers = {
-                'host': 'bless.network',
-                'pragma': 'no-cache',
-                'cache-control': 'no-cache',
-                'sec-ch-ua-platform': '"Windows"',
-                'content-type': 'text/plain;charset=UTF-8',
                 'accept': '*/*',
+                #'accept-language': 'zh-CN,zh;q=0.9,ja;q=0.8,en-US;q=0.7,en;q=0.6',
+                'cache-control': 'no-cache',
+                'content-type': 'application/json',
                 'origin': 'https://bless.network',
-                'referer': f'https://bless.network/dashboard/achievements?state=state&code={code}',
-                'accept-encoding': 'gzip, deflate, br, zstd',
-                'priority': 'u=1, i'
+                'pragma': 'no-cache',
+                'priority': 'u=1, i',
+                'referer': F'https://bless.network/dashboard/callback/x?state=state&code={code}', 
+                # 'sec-ch-ua': '"Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"Windows"',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'same-origin',
             }
             headers.update({'user-agent': self.account.user_agent, 'accept-language': 'en,en-US;q=0.9'})
             if not proxy_url:
