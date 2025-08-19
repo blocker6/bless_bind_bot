@@ -431,6 +431,7 @@ class TwiiterOAuth_1:
             }
         
         payload = f'approval=true&code={code}'
+        logger.success(payload)
 
         try:
             response = await self.http.post(url, headers=headers, data=payload)

@@ -382,7 +382,7 @@ class API():
             
             payload = {
                 "code": code,
-                "gatewayAuthToken": self.account.bless_auth_token
+                "gatewayAuthToken": f"{self.account.bless_auth_token}\n"
             }
             
             headers = {
@@ -401,6 +401,7 @@ class API():
             if proxy_url:
                 proxy_url= self.account.proxy_url
             resp = await asyncio.to_thread(requests.post, url=url, headers=headers, json=payload, timeout=30, impersonate="safari15_5", proxy=proxy_url)
+            logger.debug(resp.text)
 
             if 'X Connect Success!' in resp.text:
                 logger.success(f"绑定Twitter成功！")
