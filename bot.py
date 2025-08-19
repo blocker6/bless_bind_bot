@@ -292,7 +292,7 @@ async def process_bind_twitter():
         accounts = await Account.filter(twitter_auth_token__isnull=False, is_delete=False, is_twitter_connected=False)
         print(len(accounts))
         random.shuffle(accounts)
-        semaphore = asyncio.Semaphore(10)
+        semaphore = asyncio.Semaphore(5)
         async def limited_bind_twitter(account: Account, proxy_url):
             async with semaphore:
                 bot = API(account)
