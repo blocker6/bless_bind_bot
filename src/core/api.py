@@ -399,7 +399,7 @@ class API():
                 'priority': 'u=1, i'
             }
             headers.update({'user-agent': self.account.user_agent, 'accept-language': 'en,en-US;q=0.9'})
-            if proxy_url:
+            if not proxy_url:
                 proxy_url= self.account.proxy_url
             resp = await asyncio.to_thread(requests.post, url=url, headers=headers, json=payload, timeout=30, impersonate="safari15_5", proxy=proxy_url)
             logger.debug(resp.text)
